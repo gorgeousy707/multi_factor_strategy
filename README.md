@@ -48,7 +48,7 @@
 
 ## 二、代码结构
 
-```bash
+```
 multi_factor_strategy/
 ├── main.py                    # 主入口，串联整个流程
 ├── config.py                  # 配置文件（参数、时间范围、股票池等）
