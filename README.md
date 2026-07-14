@@ -48,6 +48,7 @@
 
 ## 二、代码结构
 
+```
 multi_factor_strategy/
 ├── main.py                    # 主入口，串联整个流程
 ├── config.py                  # 配置文件（参数、时间范围、股票池等）
@@ -77,6 +78,7 @@ multi_factor_strategy/
 │   ├── figures/               # 图表输出
 │   └── results/               # 回测结果数据（CSV）
 └── README.md                  # 项目文档
+```
 
 ## 三、主要程序功能
 
