@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Local data cache (重新运行会自动下载)
+data/raw_data/
+
+# Output files (重新运行会自动生成)
+output/figures/
+output/results/
+output/cache/
+output/*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
