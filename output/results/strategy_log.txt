@@ -1,0 +1,122 @@
+2026-07-12 22:46:19 [INFO] __main__: =================================================================
+2026-07-12 22:46:19 [INFO] __main__:   多因子选股策略回测系统
+2026-07-12 22:46:19 [INFO] __main__: =================================================================
+2026-07-12 22:46:19 [INFO] __main__:   回测区间: 2019-01-01 ~ 2024-12-31
+2026-07-12 22:46:19 [INFO] __main__:   调仓频率: M
+2026-07-12 22:46:19 [INFO] __main__:   选股数量: 30
+2026-07-12 22:46:19 [INFO] __main__: =================================================================
+2026-07-12 22:46:19 [INFO] __main__: 
+[Step 1/7] 数据获取...
+2026-07-12 22:46:19 [INFO] data.data_fetcher: 从离线文件加载所有数据...
+2026-07-12 22:46:19 [INFO] data.data_fetcher: 从离线文件加载: data/raw_data\hs300_stocks.csv, 共 300 行
+2026-07-12 22:46:19 [INFO] data.data_fetcher: 从离线文件加载: data/raw_data\daily_prices.csv, 共 515665 行
+2026-07-12 22:46:19 [WARNING] data.data_fetcher: 离线文件为空(无法解析): data/raw_data\financial_data.csv
+2026-07-12 22:46:19 [WARNING] data.data_fetcher: 离线文件为空(无法解析): data/raw_data\daily_basic.csv
+2026-07-12 22:46:19 [WARNING] data.data_fetcher: 离线文件为空(无法解析): data/raw_data\benchmark_hs300.csv
+2026-07-12 22:46:20 [INFO] __main__:   股票数量: 300
+2026-07-12 22:46:20 [INFO] __main__:   行情记录: 515665
+2026-07-12 22:46:20 [INFO] __main__:   财务记录: 0
+2026-07-12 22:46:20 [INFO] __main__: 
+[Step 2/7] 计算个股日收益率...
+2026-07-12 22:46:20 [INFO] __main__: 
+[Step 3/7] 计算各类因子...
+2026-07-12 22:46:20 [INFO] factors.value_factors: 计算价值因子...
+2026-07-12 22:46:20 [ERROR] factors.value_factors: 无可用数据计算价值因子
+2026-07-12 22:46:20 [INFO] __main__:   价值因子: 0 条
+2026-07-12 22:46:20 [INFO] factors.growth_factors: 计算成长因子...
+2026-07-12 22:46:20 [ERROR] factors.growth_factors: 无财务数据，无法计算成长因子
+2026-07-12 22:46:20 [INFO] __main__:   成长因子: 0 条
+2026-07-12 22:46:20 [INFO] factors.quality_factors: 计算质量因子...
+2026-07-12 22:46:20 [ERROR] factors.quality_factors: 无财务数据，无法计算质量因子
+2026-07-12 22:46:20 [INFO] __main__:   质量因子: 0 条
+2026-07-12 22:46:20 [INFO] factors.momentum_factors: 计算动量因子...
+2026-07-12 22:46:21 [INFO] factors.momentum_factors: 动量因子计算完成，共 509426 条记录
+2026-07-12 22:46:21 [INFO] __main__:   动量因子: 509426 条
+2026-07-12 22:46:21 [INFO] factors.volatility_factors: 计算波动因子...
+2026-07-12 22:46:21 [INFO] factors.volatility_factors: 波动因子计算完成，共 497843 条记录
+2026-07-12 22:46:21 [INFO] __main__:   波动因子: 497843 条
+2026-07-12 22:46:21 [INFO] factors.sentiment_factors: 计算情绪因子...
+2026-07-12 22:46:21 [INFO] factors.sentiment_factors: 日线数据中无换手率列，用成交额作为代理变量
+2026-07-12 22:46:21 [INFO] factors.sentiment_factors: 情绪因子计算完成，共 510020 条记录
+2026-07-12 22:46:21 [INFO] __main__:   情绪因子: 510020 条
+2026-07-12 22:46:21 [INFO] __main__: 
+[Step 4/7] 因子处理（缺失值、去极值、标准化）...
+2026-07-12 22:46:21 [INFO] portfolio.factor_processor: 开始因子处理流程...
+2026-07-12 22:46:21 [INFO] portfolio.factor_processor: 合并多类因子...
+2026-07-12 22:46:21 [WARNING] portfolio.factor_processor: 因子 'value' 为空，跳过
+2026-07-12 22:46:21 [WARNING] portfolio.factor_processor: 因子 'growth' 为空，跳过
+2026-07-12 22:46:21 [WARNING] portfolio.factor_processor: 因子 'quality' 为空，跳过
+2026-07-12 22:46:22 [INFO] portfolio.factor_processor: 因子合并完成，包含因子: ['momentum', 'volatility', 'sentiment']
+2026-07-12 22:46:22 [INFO] portfolio.factor_processor: 处理缺失值...
+2026-07-12 22:46:22 [INFO] portfolio.factor_processor: 缺失值处理完成，剩余缺失值: 0
+2026-07-12 22:46:22 [INFO] portfolio.factor_processor: 去极值处理 (mad 法)...
+2026-07-12 22:46:25 [INFO] portfolio.factor_processor: 标准化处理 (zscore 法)...
+2026-07-12 22:46:25 [INFO] portfolio.factor_processor: 因子处理完成，合并后共 509426 条记录
+2026-07-12 22:46:25 [INFO] __main__:   处理后因子数据: 509426 条
+2026-07-12 22:46:25 [INFO] portfolio.factor_processor: 因子相关性矩阵:
+            momentum  volatility  sentiment
+momentum       1.000      -0.211     -0.037
+volatility    -0.211       1.000      0.100
+sentiment     -0.037       0.100      1.000
+2026-07-12 22:46:26 [INFO] portfolio.factor_processor: 计算因子 IC 值...
+2026-07-12 22:46:28 [INFO] portfolio.factor_processor: === 因子 IC 统计 ===
+2026-07-12 22:46:28 [INFO] portfolio.factor_processor: momentum: IC均值=0.1162, IC标准差=0.2269, IR=0.5119
+2026-07-12 22:46:28 [INFO] portfolio.factor_processor: volatility: IC均值=0.0178, IC标准差=0.2713, IR=0.0656
+2026-07-12 22:46:28 [INFO] portfolio.factor_processor: sentiment: IC均值=0.0032, IC标准差=0.0825, IR=0.0393
+2026-07-12 22:46:28 [INFO] __main__: 
+[Step 5/7] 综合打分与选股...
+2026-07-12 22:46:28 [INFO] portfolio.scorer: 计算综合得分...
+2026-07-12 22:46:28 [INFO] portfolio.scorer: 使用等权打分，共 3 个因子大类
+2026-07-12 22:46:29 [INFO] portfolio.scorer: 综合得分计算完成，共 509426 条记录
+2026-07-12 22:46:29 [INFO] portfolio.scorer: 开始选股（调仓频率=M, 选股数量=30）...
+2026-07-12 22:46:29 [INFO] portfolio.scorer: 选股完成，共 2850 条选股记录
+2026-07-12 22:46:29 [INFO] portfolio.scorer: 调仓次数: 95
+2026-07-12 22:46:29 [INFO] portfolio.scorer: 每次选股数: 30
+2026-07-12 22:46:29 [INFO] __main__:   选股记录数: 2850
+2026-07-12 22:46:29 [INFO] __main__:   调仓次数: 95
+2026-07-12 22:46:29 [INFO] portfolio.scorer: 构建持仓权重...
+2026-07-12 22:46:29 [INFO] portfolio.scorer: 持仓权重构建完成，共 57240 条记录
+2026-07-12 22:46:29 [INFO] __main__:   持仓权重记录: 57240
+2026-07-12 22:46:29 [INFO] __main__: 
+[Step 6/7] 回测分析...
+2026-07-12 22:46:29 [INFO] portfolio.backtest: ==================================================
+2026-07-12 22:46:29 [INFO] portfolio.backtest: 开始回测...
+2026-07-12 22:46:29 [INFO] portfolio.backtest: ==================================================
+2026-07-12 22:46:29 [INFO] portfolio.backtest: 计算策略每日收益率...
+2026-07-12 22:46:29 [INFO] portfolio.backtest: 策略收益率计算完成，共 1908 个交易日
+2026-07-12 22:46:29 [INFO] portfolio.backtest: 计算累计净值...
+2026-07-12 22:46:29 [INFO] portfolio.backtest: 累计净值计算完成，最终净值: 2.3168
+2026-07-12 22:46:29 [INFO] portfolio.backtest: 计算绩效指标...
+2026-07-12 22:46:29 [INFO] portfolio.backtest: ==================================================
+2026-07-12 22:46:29 [INFO] portfolio.backtest: 绩效指标报告
+2026-07-12 22:46:29 [INFO] portfolio.backtest: ==================================================
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   累计收益率: 131.68%
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   年化收益率: 11.74%
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   年化波动率: 15.45%
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   夏普比率: 0.6012
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   最大回撤: -23.59%
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   Calmar比率: 0.4975
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   日胜率: 39.57%
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   盈亏比: 1.1274
+2026-07-12 22:46:29 [INFO] portfolio.backtest:   交易天数: 1908
+2026-07-12 22:46:29 [INFO] portfolio.backtest: ==================================================
+2026-07-12 22:46:29 [INFO] __main__: 
+[Step 7/7] 生成图表与保存结果...
+2026-07-12 22:46:29 [INFO] utils.visualization: 开始生成图表...
+2026-07-12 22:46:30 [INFO] utils.visualization: 累计净值曲线已保存: output/figures\01_累计净值曲线.png
+2026-07-12 22:46:30 [INFO] utils.visualization: 回撤曲线已保存: output/figures\02_回撤曲线.png
+2026-07-12 22:46:30 [INFO] utils.visualization: 月度收益热力图已保存: output/figures\03_月度收益热力图.png
+2026-07-12 22:46:30 [INFO] matplotlib.category: Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-07-12 22:46:30 [INFO] matplotlib.category: Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2026-07-12 22:46:30 [INFO] utils.visualization: 年度收益柱状图已保存: output/figures\04_年度收益柱状图.png
+2026-07-12 22:46:30 [INFO] utils.visualization: 因子IC值图已保存: output/figures\05_因子IC值.png
+2026-07-12 22:46:31 [INFO] utils.visualization: 滚动指标图已保存: output/figures\06_滚动指标.png
+2026-07-12 22:46:31 [INFO] utils.visualization: 绩效汇总已保存: output\results\performance_summary.csv
+2026-07-12 22:46:31 [INFO] utils.visualization: 所有图表已保存至: output/figures
+2026-07-12 22:46:31 [INFO] __main__: 
+结果文件已保存至: output/results
+2026-07-12 22:46:31 [INFO] __main__: 图表文件已保存至: output/figures
+2026-07-12 22:46:31 [INFO] __main__: 
+=================================================================
+2026-07-12 22:46:31 [INFO] __main__:   回测完成！总耗时: 11.4 秒
+2026-07-12 22:46:31 [INFO] __main__: =================================================================

@@ -1,0 +1,15 @@
+name: multi_factor_strategy
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy>=1.24.0
+  - pandas>=2.0.0
+  - matplotlib>=3.7.0
+  - seaborn>=0.12.0
+  - scipy>=1.10.0
+  - openpyxl>=3.1.0
+  - pip:
+      - akshare>=1.13.0
